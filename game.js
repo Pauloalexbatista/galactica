@@ -1519,7 +1519,8 @@ function render() {
 
     ctx.fillStyle = '#617d98';
     ctx.font = '8px "Press Start 2P"';
-    ctx.fillText("CONTROLOS: [O/P] Esq/Dir [Q/A] Cima/Baixo [SPC] Tiro [X] Escudo", WIDTH / 2, 690);
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    ctx.fillText(isTouchDevice ? "TOQUE NO ECRÃ OU USA OS BOTÕES ABAIXO" : "CONTROLOS: [O/P] Esq/Dir [Q/A] Cima/Baixo [SPC] Tiro [X] Escudo", WIDTH / 2, 690);
 
   } else if (gameState === STATE.INTRO_GALACTICA) {
     drawCinematicGalactica(ctx, stateTimer);

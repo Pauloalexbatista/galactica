@@ -95,6 +95,7 @@ body {
   background: #000;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  touch-action: none;
 }
 
 /* CRT scanlines effect */
@@ -193,45 +194,45 @@ body {
   background: linear-gradient(90deg, #ff4d4d, #ff9900);
 }
 
-/* Touch controls for mobile / tablet */
+/* Touch controls panel placed BELOW the screen */
 #touch-controls {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
-  display: none; /* activated on touch or smaller screens */
+  width: 100%;
+  padding: 10px 14px;
+  background: #0a0f18;
+  border-top: 2px solid #1f2c3d;
+  display: none; /* Ativado em telemóveis e ecrãs táteis */
   justify-content: space-between;
+  align-items: center;
   z-index: 15;
-  pointer-events: auto;
-}
-
-@media (max-width: 768px), (pointer: coarse) {
-  #touch-controls {
-    display: flex;
-  }
 }
 
 .t-btn {
-  background: rgba(20, 35, 55, 0.75);
+  background: rgba(18, 28, 42, 0.95);
   border: 2px solid #00d2ff;
   color: #fff;
   font-family: 'Press Start 2P', monospace;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 8px;
-  padding: 12px 18px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 210, 255, 0.3);
+  padding: 12px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 210, 255, 0.25);
   touch-action: manipulation;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .t-btn:active {
-  background: rgba(0, 210, 255, 0.5);
+  background: rgba(0, 210, 255, 0.45);
   transform: translateY(2px);
 }
 
 #touch-dpad {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+}
+
+.dpad-btn {
+  font-size: 18px;
+  padding: 14px 22px;
 }
 
 #touch-actions {
@@ -240,18 +241,31 @@ body {
 }
 
 .action-btn {
-  font-size: 9px;
-  padding: 12px 14px;
+  font-size: 10px;
+  padding: 14px 16px;
+}
+
+.shield-btn {
+  background: rgba(255, 170, 0, 0.15);
+  border-color: #ffaa00;
+  color: #ffaa00;
+  box-shadow: 0 0 8px rgba(255, 170, 0, 0.35);
+}
+
+.shield-btn:active {
+  background: rgba(255, 170, 0, 0.6);
+  color: #ffffff;
 }
 
 .fire-btn {
-  background: rgba(255, 45, 85, 0.4);
+  background: rgba(255, 45, 85, 0.35);
   border-color: #ff2d55;
-  box-shadow: 0 0 10px rgba(255, 45, 85, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 45, 85, 0.5);
 }
 
 .fire-btn:active {
-  background: rgba(255, 45, 85, 0.8);
+  background: rgba(255, 45, 85, 0.85);
 }
 
 /* Footer / instructions */
@@ -275,4 +289,92 @@ body {
 
 .controls-legend strong {
   color: #00d2ff;
+}
+
+/* ==========================================================================
+   Mobile & Touchscreen Responsive Layout
+   ========================================================================== */
+@media (max-width: 768px), (pointer: coarse) {
+  #game-container {
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  #arcade-cabinet {
+    border: none;
+    border-radius: 0;
+    max-width: 100%;
+    height: 100vh;
+    box-shadow: none;
+    justify-content: space-between;
+  }
+
+  #arcade-marquee {
+    padding: 6px 10px;
+  }
+
+  .marquee-sub {
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 1px;
+  }
+
+  .marquee-title {
+    font-size: 19px;
+    letter-spacing: 4px;
+  }
+
+  .marquee-badge {
+    font-size: 7px;
+    margin-top: 2px;
+  }
+
+  #screen-wrapper {
+    flex: 1;
+    border: none;
+    max-height: calc(100vh - 145px);
+  }
+
+  #gameCanvas {
+    max-height: calc(100vh - 145px);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* HUD layout for narrow screens */
+  #hud {
+    top: 6px;
+    left: 8px;
+    right: 8px;
+    font-size: 8px;
+  }
+
+  .hud-label {
+    font-size: 6px;
+  }
+
+  #scoreDisplay, #highScoreDisplay {
+    font-size: 10px;
+  }
+
+  .viper-life-icon {
+    width: 11px;
+    height: 11px;
+  }
+
+  .shield-meter-bg {
+    width: 60px;
+    height: 6px;
+  }
+
+  /* Ativar botões táteis abaixo do ecrã */
+  #touch-controls {
+    display: flex;
+  }
+
+  /* Esconder rodapé de instruções com teclas no telemóvel! */
+  #arcade-footer {
+    display: none !important;
+  }
 }

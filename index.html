@@ -40,23 +40,23 @@
             <div id="livesContainer"></div>
           </div>
           <div class="hud-item shield-box">
-            <span class="hud-label">PHOENIX SHIELD [X]</span>
+            <span class="hud-label">SHIELD [X]</span>
             <div class="shield-meter-bg">
               <div id="shieldMeter" style="width: 100%;"></div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Touch Controls for Mobile/Mouse -->
-        <div id="touch-controls">
-          <div id="touch-dpad">
-            <button class="t-btn" id="btn-left">&larr;</button>
-            <button class="t-btn" id="btn-right">&rarr;</button>
-          </div>
-          <div id="touch-actions">
-            <button class="t-btn action-btn" id="btn-shield">SHIELD</button>
-            <button class="t-btn action-btn fire-btn" id="btn-fire">FIRE</button>
-          </div>
+      <!-- Touch Controls below screen (For Mobile/Tablet - does not block the Viper!) -->
+      <div id="touch-controls">
+        <div id="touch-dpad">
+          <button class="t-btn dpad-btn" id="btn-left" aria-label="Esquerda">&larr;</button>
+          <button class="t-btn dpad-btn" id="btn-right" aria-label="Direita">&rarr;</button>
+        </div>
+        <div id="touch-actions">
+          <button class="t-btn action-btn shield-btn" id="btn-shield">SHIELD</button>
+          <button class="t-btn action-btn fire-btn" id="btn-fire">FIRE</button>
         </div>
       </div>
 
