@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>GALACTICA: VIPER STRIKE (Phoenix Arcade Edition)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="game-container">
+    <div id="arcade-cabinet">
+      <!-- Top Marquee -->
+      <header id="arcade-marquee">
+        <div class="marquee-sub">COLONIAL FLEET COMMAND</div>
+        <div class="marquee-title">GALACTICA</div>
+        <div class="marquee-badge">VIPER STRIKE &bull; PHOENIX ARCADE</div>
+      </header>
+
+      <!-- Main Screen / CRT effect overlay -->
+      <div id="screen-wrapper">
+        <canvas id="gameCanvas" width="600" height="750"></canvas>
+        <div class="scanlines"></div>
+        <div class="crt-glow"></div>
+
+        <!-- UI Overlays -->
+        <div id="hud">
+          <div class="hud-item score-box">
+            <span class="hud-label">SCORE</span>
+            <span id="scoreDisplay">00000</span>
+          </div>
+          <div class="hud-item highscore-box">
+            <span class="hud-label">HIGH</span>
+            <span id="highScoreDisplay">10000</span>
+          </div>
+          <div class="hud-item lives-box">
+            <span class="hud-label">VIPERS</span>
+            <div id="livesContainer"></div>
+          </div>
+          <div class="hud-item shield-box">
+            <span class="hud-label">PHOENIX SHIELD [X]</span>
+            <div class="shield-meter-bg">
+              <div id="shieldMeter" style="width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Touch Controls for Mobile/Mouse -->
+        <div id="touch-controls">
+          <div id="touch-dpad">
+            <button class="t-btn" id="btn-left">&larr;</button>
+            <button class="t-btn" id="btn-right">&rarr;</button>
+          </div>
+          <div id="touch-actions">
+            <button class="t-btn action-btn" id="btn-shield">SHIELD</button>
+            <button class="t-btn action-btn fire-btn" id="btn-fire">FIRE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arcade Footer / Controls helper -->
+      <footer id="arcade-footer">
+        <div class="controls-legend">
+          <span><strong>[O / P]</strong> Esquerda / Direita</span>
+          <span><strong>[Q / A]</strong> Cima / Baixo</span>
+          <span><strong>[ESPAÇO]</strong> Disparar Lasers</span>
+          <span><strong>[X]</strong> Escudo Phoenix</span>
+          <span><strong>[M]</strong> Som</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

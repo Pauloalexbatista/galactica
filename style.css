@@ -1,0 +1,278 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at center, #0b101c 0%, #030508 100%);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+}
+
+#arcade-cabinet {
+  background: #111622;
+  border: 4px solid #3a4759;
+  border-radius: 18px;
+  box-shadow: 0 0 50px rgba(0, 180, 255, 0.25), inset 0 0 25px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 650px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Marquee */
+#arcade-marquee {
+  width: 100%;
+  padding: 10px 15px;
+  background: linear-gradient(180deg, #1f2b3e 0%, #0b121c 100%);
+  border-bottom: 3px solid #00d2ff;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+}
+
+.marquee-sub {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #ff9d00;
+  margin-bottom: 3px;
+  text-shadow: 0 0 8px rgba(255, 157, 0, 0.8);
+}
+
+.marquee-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: 6px;
+  color: #eaf4ff;
+  text-shadow: 0 0 12px #00e5ff, 0 0 25px #0077ff;
+}
+
+.marquee-badge {
+  font-size: 8px;
+  color: #8faec9;
+  margin-top: 4px;
+  letter-spacing: 2px;
+}
+
+/* Screen Wrapper */
+#screen-wrapper {
+  position: relative;
+  width: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 2px solid #233144;
+  border-right: 2px solid #233144;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  aspect-ratio: 600 / 750;
+  background: #000;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* CRT scanlines effect */
+.scanlines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.35) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 5;
+  opacity: 0.85;
+}
+
+.crt-glow {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 60px rgba(0, 160, 255, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.1);
+  z-index: 6;
+}
+
+/* HUD Overlay */
+#hud {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+  font-size: 10px;
+  text-shadow: 0 0 5px #000;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hud-label {
+  font-size: 7px;
+  color: #8ca4c0;
+  letter-spacing: 1px;
+}
+
+#scoreDisplay {
+  color: #00ffcc;
+  font-size: 12px;
+  text-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
+}
+
+#highScoreDisplay {
+  color: #ffb700;
+  font-size: 12px;
+  text-shadow: 0 0 8px rgba(255, 183, 0, 0.7);
+}
+
+#livesContainer {
+  display: flex;
+  gap: 5px;
+}
+
+.viper-life-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  background: #ffffff;
+  clip-path: polygon(50% 0%, 100% 100%, 75% 85%, 25% 85%, 0% 100%);
+  filter: drop-shadow(0 0 3px #00d2ff);
+}
+
+/* Shield Meter */
+.shield-meter-bg {
+  width: 85px;
+  height: 8px;
+  background: #192331;
+  border: 1px solid #00d2ff;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 210, 255, 0.4);
+}
+
+#shieldMeter {
+  height: 100%;
+  background: linear-gradient(90deg, #00d2ff, #29ffc6);
+  transition: width 0.15s ease, background 0.3s;
+}
+
+#shieldMeter.cooling-down {
+  background: linear-gradient(90deg, #ff4d4d, #ff9900);
+}
+
+/* Touch controls for mobile / tablet */
+#touch-controls {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: none; /* activated on touch or smaller screens */
+  justify-content: space-between;
+  z-index: 15;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  #touch-controls {
+    display: flex;
+  }
+}
+
+.t-btn {
+  background: rgba(20, 35, 55, 0.75);
+  border: 2px solid #00d2ff;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 210, 255, 0.3);
+  touch-action: manipulation;
+}
+
+.t-btn:active {
+  background: rgba(0, 210, 255, 0.5);
+  transform: translateY(2px);
+}
+
+#touch-dpad {
+  display: flex;
+  gap: 10px;
+}
+
+#touch-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  font-size: 9px;
+  padding: 12px 14px;
+}
+
+.fire-btn {
+  background: rgba(255, 45, 85, 0.4);
+  border-color: #ff2d55;
+  box-shadow: 0 0 10px rgba(255, 45, 85, 0.5);
+}
+
+.fire-btn:active {
+  background: rgba(255, 45, 85, 0.8);
+}
+
+/* Footer / instructions */
+#arcade-footer {
+  width: 100%;
+  padding: 10px 14px;
+  background: #090e16;
+  border-top: 2px solid #233144;
+  text-align: center;
+}
+
+.controls-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  font-size: 8px;
+  color: #9cb1c9;
+  line-height: 1.5;
+}
+
+.controls-legend strong {
+  color: #00d2ff;
+}
